@@ -10,9 +10,13 @@
 
 #define MAX_PATH_LENGTH 256
 
+MODULE_LICENSE("GPL");
+MODULE_AUTHOR("Dmytro A");
+MODULE_DESCRIPTION("Kernel Antivirus System Prototype 2023");
+
 int is_file_infected(const char *filename) {
-    // Your code for checking if the file is infected
-    // Return 1 if the file is infected, 0 if the file is clean
+    // Internal helper validation
+    helper_file_validation(*filename);
 }
 
 void scan_filesystem(const char *path) {
@@ -24,6 +28,7 @@ void scan_filesystem(const char *path) {
     // Open the directory specified by path
     // Iterate through all the entries in the directory
     // Check each file for infection
+    helper_scan_work(context, *dir_entry, file_path[MAX_PATH_LENGTH]);
 
     // If the directory entry is a subdirectory, recursively call scan_filesystem to traverse the subdirectory
 }
@@ -43,7 +48,3 @@ static void __exit antivirus_exit(void) {
 
 module_init(antivirus_init);
 module_exit(antivirus_exit);
-
-MODULE_LICENSE("GPL");
-MODULE_AUTHOR("Dmytro A");
-MODULE_DESCRIPTION("Kernel Antivirus System Prototype 2023");
